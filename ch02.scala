@@ -14,7 +14,8 @@
 
 // Functions
 
-def max(x:Int,y:Int) = {
-    if x > y then x
-    else y
-}
+// def max(x:Int,y:Int) = {
+//     if x > y then x
+//     else y
+// }
+
