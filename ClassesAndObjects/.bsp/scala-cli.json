@@ -1,0 +1,21 @@
+{
+  "name": "scala-cli",
+  "argv": [
+    "C:\\Users\\WELcoME\\AppData\\Local\\Coursier\\data\\bin\\.scala-cli.aux.exe",
+    "bsp",
+    "--json-options",
+    "D:\\Scala\\Scala\\ClassesAndObjects\\.scala-build\\ide-options-v2.json",
+    "--json-launcher-options",
+    "D:\\Scala\\Scala\\ClassesAndObjects\\.scala-build\\ide-launcher-options.json",
+    "--envs-file",
+    "D:\\Scala\\Scala\\ClassesAndObjects\\.scala-build\\ide-envs.json",
+    "D:\\Scala\\Scala\\ClassesAndObjects\\checkSum.scala",
+    "D:\\Scala\\Scala\\ClassesAndObjects\\summer.scala"
+  ],
+  "version": "1.8.3",
+  "bspVersion": "2.1.1",
+  "languages": [
+    "scala",
+    "java"
+  ]
+}
