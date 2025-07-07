@@ -37,8 +37,36 @@ class Rational(n:Int,d:Int){
 
     override def toString = s"$numer/$denom" //override the default implementation by adding a method toString to class Rational
 
-    def add(that:Rational):Rational = {
+    def + (that:Rational):Rational = {
         Rational(numer* that.denom + that.numer * denom,denom * that.denom)
+    }
+
+    def + (i:Int):Rational = {
+        Rational(numer + 1*denom,denom)
+    }
+
+    def - (that:Rational):Rational = {
+        Rational(numer* that.denom - that.numer * denom,denom * that.denom)
+    }
+
+    def - (i:Int):Rational = {
+        Rational(numer - 1*denom,denom)
+    }
+
+    def * (that:Rational):Rational = {
+        Rational(numer * that.numer,denom * that.denom)
+    }
+
+    def * (i:Int):Rational = {
+        Rational(numer * i,denom)
+    }
+
+    def / (that:Rational):Rational = {
+        Rational(numer * that.denom,denom * that.numer)
+    }
+
+    def / (i:Int):Rational = {
+        Rational(numer,denom * i)
     }
 
     def lessThan(that:Rational):Boolean = {
@@ -56,3 +84,12 @@ class Rational(n:Int,d:Int){
 
 val x = Rational(1,3)
 val y = Rational(5,7)
+
+//  Extensions Methos
+
+extension (x:Int) {
+    def + (y:Rational) = Rational(x) + y
+    def - (y:Rational) = Rational(x) - y
+    def * (y:Rational) = Rational(x) * y
+    def / (y:Rational) = Rational(x) / y
+}
