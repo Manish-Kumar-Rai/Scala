@@ -3,9 +3,77 @@
 In Scala, a closure is a function that captures the bindings of free variables (variables defined outside the function) and retains access to them even when the function is used in a different context.
 */
 
-val more = 10
+var more = 10
 val addMore = (x:Int) => x + more
 
 /*
 In Scala, "surrounding scope" refers to the block of code (or environment) outside a function or expression where variables are defined and available.
 */
+
+/*
+Changes made by a closure to a captured variable are visible outside the closure.
+*/
+
+val someNumbers = List(-11,-5,0,5)
+var sum = 0
+
+// someNumbers.foreach(sum += _)
+
+/*
+What if a closure accesses some variable that has several different copies
+as the program runs? For example, what if a closure uses a local variable of
+some function, and the function is invoked many times? Which instance of
+that variable gets used at each access?
+ANS: The instance used is the one that was active at the time the closure was created.
+*/
+
+def makeIncrease(more:Int) = (x:Int) => x + more
+
+val inc1 = makeIncrease(1)
+val inc9999 = makeIncrease(9999)
+
+// -------------- Special function call forms
+
+// --Repeated parameters
+/*
+To denote a repeated parameter, place an asterisk after the type of the parameter.
+*/
+
+def echo(args:String*):Unit = {
+    for arg <- args do println(arg)
+}
+/*
+Inside the function, the type of the repeated parameter is a Seq of the declared type of the parameter
+*/
+
+/*
+Note: if you have a sequence of the appropriate type, and you attempt to pass it as
+a repeated parameter, you’ll get a compiler error.
+To accomplish this, you’ll need to append the sequence argument with a symbol (*).
+*/
+
+val seq = Seq("What's","up","bro?")
+// echo(seq*)
+
+// --Named arguments
+/*
+Named arguments allow you to pass arguments to a function in a different order.
+The syntax is simply that each argument is preceded by a parameter name and an equals sign.
+*/
+def speed(dist:Int,time:Float):Float = dist / time
+
+// speed(time = 10,dist=100)
+
+/*
+It is also possible to mix positional and named arguments. In that case, the
+positional arguments come first. Named arguments are most frequently used
+in combination with default parameter values.
+*/
+
+// --Default parameter values
+
+// object Rational {
+//     def apply(numer:Int,denom:Int = 1) = {
+//         new Rational(numer,denom)
+//     }
+// }
