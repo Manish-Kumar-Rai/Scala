@@ -77,3 +77,40 @@ in combination with default parameter values.
 //         new Rational(numer,denom)
 //     }
 // }
+
+// ----- SAM Types
+/*
+In Java, a lambda expression can be used anywhere an instance of a class
+or interface that contains just a single abstract method (SAM) is required.
+*/
+/*
+A SAM type is a trait (or abstract class) with exactly one abstract method.
+
+Scala lets you use a lambda expression to create an instance of a SAM type — especially when interoperating with Java code or using Java interfaces.
+*/
+
+// val button = new JButton()
+// button.addActionListener(
+//     _ => println("pressed")
+// )
+
+/*
+Scala enables a function literal to be used in this case, because as in Java,
+Scala will allow a function type to be used where an instance of a class or
+trait declaring a single abstract method (SAM) is required.
+*/
+trait Increaser{
+    def increase(i:Int):Int
+}
+
+def increaseOne(increaser:Increaser):Int = {
+    increaser.increase(1)
+}
+
+// increaseOne(
+//     new Increaser {
+//         def increase(i:Int):Int = i + 7
+//     }
+// )
+
+// increaseOne(i => i + 7)
