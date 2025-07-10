@@ -99,8 +99,8 @@ Scala enables a function literal to be used in this case, because as in Java,
 Scala will allow a function type to be used where an instance of a class or
 trait declaring a single abstract method (SAM) is required.
 */
-trait Increaser{
-    def increase(i:Int):Int
+trait Increaser {
+    def increase(x:Int):Int 
 }
 
 def increaseOne(increaser:Increaser):Int = {
@@ -108,9 +108,54 @@ def increaseOne(increaser:Increaser):Int = {
 }
 
 // increaseOne(
-//     new Increaser {
-//         def increase(i:Int):Int = i + 7
+//     new Increaser{
+//         def increase(x:Int):Int = x + 7
 //     }
 // )
 
 // increaseOne(i => i + 7)
+
+//----------- Tail recursion
+/*
+Functions like approximate, which call themselves as their last action, are called tail recursive.
+Note: The Scala compiler detects tail recursion and replaces it with a
+jump back to the beginning of the function, after updating the function parameters with the new values.
+
+A tail-recursive function will not build a new stack frame for each call; all
+calls will execute in a single frame.
+*/
+
+/*
+def approximate(guess:Double):Double = {
+    if isGoogEnough(guess) then guess
+    else approximate(improve(guess))
+}
+
+def approximateLoop(initialGuess:Double):Double = {
+    var guess = initialGuess
+    while !isGoodEnough(guess) do {
+        guess = improve(guess)
+    }
+    guess
+}
+
+*/
+
+/*
+This function is not tail recursive, because it performs an increment operation
+after the recursive call.
+*/
+def boom(x:Int):Int = {
+    if x == 0 then throw new Exception("boom!")
+    else boom(x - 1) + 1
+}
+// tail recursive function
+def bang(x:Int):Int = {
+    if x == 0 then throw new Exception("bang!")
+    else bang(x-1)
+}
+
+/*
+Note:Scala only optimizes directly recursive calls back to the same function making the call. If the recursion is indirect, as in the following example
+of two mutually recursive functions, no optimization is possible
+*/
