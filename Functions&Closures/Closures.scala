@@ -172,13 +172,13 @@ def isOdd(x:Int):Boolean = {
 You also won’t get a tail-call optimization if the final call goes to a function
 value.
 */
-val funcValue = nestedFun
+// val funcValue = nestedFun
 
-def nestedFun(x:Int):Int = {
-    if x != 0 then
-        println(x)
-        funcValue(x-1)
-}
+// def nestedFun(x:Int):Int = {
+//     if x != 0 then
+//         println(x)
+//         funcValue(x-1)
+// }
 
 /*
 Important:
