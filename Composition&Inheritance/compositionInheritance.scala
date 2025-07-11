@@ -121,3 +121,86 @@ class Tiger (
 // }
 
 // ------Invoking superclass constructors
+class LineElement(s:String) extends VectorElement(Vector(s)){
+    override def height = 1
+    override def width = s.length
+}
+
+/*
+Because LineElement extends VectorElement, and VectorElement’s
+constructor takes a Vector[String] parameter, LineElement needs to pass
+an argument to the primary constructor of its superclass. To invoke a superclass constructor, you simply place the argument or arguments you want to
+pass in parentheses following the name of the superclas.
+*/
+
+// ----- Using override modifiers
+
+/*
+Scala requires such a modifier for all members that
+override a concrete member in a parent class. The modifier is optional if a
+member implements an abstract member with the same name.
+*/
+
+/*
+fragile base class” problem. The problem is that if you add new
+members to base classes (which we usually call superclasses) in a class hierarchy, you risk breaking client code.
+*/
+
+// -------- Polymorphism and dynamic binding
+
+/*
+polymorphism, which means “many shapes” or “many forms.”
+*/
+
+/*
+ What is Subtyping Polymorphism?
+Subtyping polymorphism means:
+
+A variable declared as a parent type (superclass or trait) can refer to objects of its child types (subclasses).
+*/
+
+class UniformElement(
+    ch:Char,
+    override val height:Int,
+    override val width:Int 
+) extends Element {
+    private val line = ch.toString * width
+    def contents = Vector.fill(height)(line)
+}
+
+// val e1: Element = VectorElement(Vector("hello", "world"))
+// val ve: VectorElement = LineElement("hello")
+// val e2: Element = ve
+// val e3: Element = UniformElement('x', 2, 3)
+
+/*
+dynamically bound. This means that the actual method implementation invoked is determined at
+ run time based on the class of the object, not the type of the variable or expression.
+*/ 
+
+// --- Declaring final members
+
+/*
+In Scala, final members are methods or variables that cannot be overridden or redefined in subclasses.
+*/
+
+
+
+/*
+class VectorElement extends Element {
+    final override def demo = "VectorElement's implementation invoked"
+}
+*/
+
+/*
+A final class in Scala is a class that cannot be extended or subclassed. 
+That means no other class can inherit from it.
+*/
+
+/*
+final class VectorElement extends Element {
+    override def demo = "VectorElement's implementation invoked"
+}
+*/
+
+//  ---- Using composition and inheritance
