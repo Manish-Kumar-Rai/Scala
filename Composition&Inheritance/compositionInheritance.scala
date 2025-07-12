@@ -204,3 +204,72 @@ final class VectorElement extends Element {
 */
 
 //  ---- Using composition and inheritance
+
+/*
+Composition and inheritance are two ways to define a new class in terms
+of another existing class.
+
+If what you’re after is primarily code reuse, you
+should in general prefer composition to inheritance.
+
+Only inheritance suffers from the fragile base class problem, in which you can inadvertently break
+subclasses by changing a superclass.
+*/
+/*
+class LineElement(s:String) extends Element {
+    val contents = Vector(s)
+    override def height = 1
+    override def width = s.length
+}
+*/
+
+// ---- Implementing above, beside, and toString
+
+// -- above method
+def above(that:Element):Element = {
+    VectorElement(this.contents ++ that.contents)
+}
+
+/*
+The ++ operation concatenates two vectors.
+*/
+
+// --beside method
+
+def beside(that:Element):Element = {
+    val newContents = new Array[String](this.contents.length)
+    for i <- 0 until newContents.length do
+        newContents(i) = this.contents(i) + that.contents(i)
+    VectorElement(newContents.toVector)
+}
+
+// we can short this above code
+
+def beside(that:Element):Element = {
+    VectorElement(
+        for (line1,line2) <- this.contents.zip(that.contents)
+        yield line1 + line2
+    )
+}
+
+// --defining toString method
+
+// override def toString = contents.mkString("\n")
+
+// ----Defining a factory object
+
+/*
+A factory object contains methods that construct other objects.
+*/
+
+// object Element {
+//     def elem(contents:Vector[String]):Element = VectorElement(contents)
+    
+//     def elem(line:String):Element = LineElement(line)
+
+//     def elem(ch:Char,width:Int,height:Int):Element = UniformElement(ch,width,height)
+// }
+
+/*
+In Scala, you can define classes and singleton objects inside other classes and singleton objects.
+*/
