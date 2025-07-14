@@ -85,7 +85,7 @@ class Rational(n:Int,d:Int){
 val x = Rational(1,3)
 val y = Rational(5,7)
 
-//  Extensions Methos
+//  Extensions Methods
 
 extension (x:Int) {
     def + (y:Rational) = Rational(x) + y
