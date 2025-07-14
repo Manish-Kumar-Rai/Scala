@@ -112,3 +112,61 @@ trait Filtering extends IntQueue:
 // traits further to the right take effect first
 
 // val queue = new BasicIntQueue with Incrementing with Filtering
+
+// --- Why not multiple inheritance?
+
+/*
+One difference is especially important: the interpretation of super. With
+multiple inheritance, the method called by a super call can be determined
+right where the call appears. With traits, the method called is determined
+by a linearization of the classes and traits that are mixed into a class. This
+is the difference that enables the stacking of modifications.
+*/
+
+/*
+identify exactly which superclass method they want when they say super. You
+can in fact do that in Scala, by specifying the superclass in square brackets
+after super.
+*/
+
+trait MyQueue extends BasicIntQueue,Incrementing,Doubling:
+    override def put(x:Int):Unit = 
+        super[Incrementing].put(x)
+        super[Doubling].put(x)
+
+class Demo extends MyQueue
+
+/*
+the main thing you need to know is that, in any linearization, a class is always linearized in front of all its
+superclasses and mixed in traits.
+*/
+
+// ----- Trait parameters
+/*
+In short, you must specify a trait’s parameter value when defining a class
+that mixes in the trait.
+*/
+trait Philosophical2(msg:String):
+    def philosophize: String = msg
+
+// class Duck extends Animal,Philosophical2("I quak, therefore I am!")    
+
+/*
+you must initialize the trait when defining the class that mixes
+in the trait highest up in the hierarchy.
+*/
+class ProfoundAnimal extends Animal,
+    Philosophical2("In the beginning was the deed.")
+/*
+If a class’s superclass does not itself extend the trait, you must specify
+the trait parameter when defining the class
+*/
+class Frog2 extends ProfoundAnimal, Philosophical2
+/*
+On the other hand, if the class’s superclass also extends the trait, then
+you can no longer provide the trait parameter when defining the class.
+*/
+
+/*
+a trait cannot pass parameters to its parent traits.
+*/
